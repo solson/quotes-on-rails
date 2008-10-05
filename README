@@ -1,7 +1,7 @@
 Quotes on Rails
 ===============
 
-Quotes on Rails is a quote database written with the {Ruby on Rails}[http://www.rubyonrails.org] web framework. People can read and vote on hilarious quotes from IRC, and submit their own.
+Quotes on Rails is a quote database written with the Ruby on Rails <http://www.rubyonrails.org> web framework. People can read and vote on hilarious quotes from IRC, and submit their own.
 
 
 Instructions:
@@ -11,7 +11,6 @@ Instructions:
   * Edit the database.yml and the settings.yml files
   * Rake db:migrate
   * Have fun :)
-
 
 Quotes on Rails can use any of the various SQL databases supported by Ruby on Rails.
 
