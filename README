@@ -10,6 +10,7 @@ Instructions:
   * Download and unzip Quotes on Rails
   * Edit the database.yml and the settings.yml files
   * Rake db:migrate
+	* [insert more instructions here!]
   * Have fun :)
 
 Quotes on Rails can use any of the various SQL databases supported by Ruby on Rails.
