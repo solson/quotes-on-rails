@@ -1,0 +1,7 @@
+== Quotes on Rails
+
+Quotes on Rails is a quote database made with Ruby on Rails.
+
+-----
+
+blah, blah, blah
