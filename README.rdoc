@@ -1,6 +1,6 @@
 = Quotes on Rails
 
-Quotes on Rails is a quote database written with the [Ruby on Rails]{http://www.rubyonrails.org} web framework. People can read and vote on hilarious quotes from IRC, and submit their own.
+Quotes on Rails is a quote database written with the {Ruby on Rails}[http://www.rubyonrails.org] web framework. People can read and vote on hilarious quotes from IRC, and submit their own.
 
 == Install
 
