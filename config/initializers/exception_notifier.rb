@@ -1,1 +1,1 @@
-ExceptionNotifier.exception_recipients = "bort@bort.com"
+ExceptionNotifier.exception_recipients = "scott@scott-olson.org"

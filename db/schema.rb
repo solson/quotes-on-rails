@@ -9,27 +9,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080929171348) do
+ActiveRecord::Schema.define(:version => 20081010045003) do
 
-  create_table "open_id_authentication_associations", :force => true do |t|
-    t.integer "issued"
-    t.integer "lifetime"
-    t.string  "handle"
-    t.string  "assoc_type"
-    t.binary  "server_url"
-    t.binary  "secret"
-  end
-
-  create_table "open_id_authentication_nonces", :force => true do |t|
-    t.integer "timestamp",  :null => false
-    t.string  "server_url"
-    t.string  "salt",       :null => false
+  create_table "ips", :force => true do |t|
+    t.integer  "ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "passwords", :force => true do |t|
     t.integer  "user_id"
     t.string   "reset_code"
     t.datetime "expiration_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "quotes", :force => true do |t|
+    t.integer  "votes_count", :default => 0
+    t.text     "quote"
+    t.text     "comment"
+    t.boolean  "approved",    :default => false
+    t.integer  "reported",    :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -71,5 +72,13 @@ ActiveRecord::Schema.define(:version => 20080929171348) do
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
+
+  create_table "votes", :force => true do |t|
+    t.integer  "ip_id"
+    t.integer  "quote_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "positive"
+  end
 
 end

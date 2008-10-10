@@ -4,7 +4,7 @@ module ApplicationHelper
   # eg. <%= title('Hello World', :h2) %> will return the following:
   # <h2>Hello World</h2> as well as setting the page title.
   def title(str, container = nil)
-    @page_title = str
+    @page_title = str + ' - ' + APP_CONFIG[:site_name]
     content_tag(container, str) if container
   end
   
