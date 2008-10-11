@@ -1,9 +1,4 @@
 <p>
-  <b>Votes count:</b>
-  <%=h @quote.votes_count %>
-</p>
-
-<p>
   <b>Quote:</b>
   <%=h @quote.quote %>
 </p>
@@ -12,17 +7,6 @@
   <b>Comment:</b>
   <%=h @quote.comment %>
 </p>
-
-<p>
-  <b>Approved:</b>
-  <%=h @quote.approved %>
-</p>
-
-<p>
-  <b>Reported:</b>
-  <%=h @quote.reported %>
-</p>
-
 
 <%= link_to 'Edit', edit_quote_path(@quote) %> |
 <%= link_to 'Back', quotes_path %>

@@ -3,6 +3,10 @@ class QuotesController < ApplicationController
   require_role :admin, :only => [ :edit, :update, :destroy, :approve ]
   
   def index
+    
+  end
+  
+  def latest
     @quotes = Quote.paginate :per_page => 20, :page => params['page'],
                              :conditions => ["approved = ?", true],
                              :order => "id DESC"

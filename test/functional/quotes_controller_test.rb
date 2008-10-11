@@ -1,11 +1,11 @@
 require 'test_helper'
 
 class QuotesControllerTest < ActionController::TestCase
-  def test_should_get_index
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:quotes)
-  end
+#  def test_should_get_index
+#    get :index
+#    assert_response :success
+#    assert_not_nil assigns(:quotes)
+#  end
 
   def test_should_get_new
     get :new
