@@ -1,6 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
- 
   # Restful Authentication Rewrites
+  map.latest '/latest', :controller => 'quotes', :action => 'index'
+  map.short_quote '/:id', :controller => 'quotes', :action => 'show'
+  
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.register '/register', :controller => 'users', :action => 'create'

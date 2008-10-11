@@ -1,0 +1,32 @@
+<h1>Editing quote</h1>
+
+<% form_for(@quote) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :votes_count %><br />
+    <%= f.text_field :votes_count %>
+  </p>
+  <p>
+    <%= f.label :quote %><br />
+    <%= f.text_area :quote %>
+  </p>
+  <p>
+    <%= f.label :comment %><br />
+    <%= f.text_area :comment %>
+  </p>
+  <p>
+    <%= f.label :approved %><br />
+    <%= f.check_box :approved %>
+  </p>
+  <p>
+    <%= f.label :reported %><br />
+    <%= f.text_field :reported %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @quote %> |
+<%= link_to 'Back', quotes_path %>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  votes_count: 1
+  quote: MyText
+  comment: MyText
+  approved: false
+  reported: 1
+
+two:
+  votes_count: 1
+  quote: MyText
+  comment: MyText
+  approved: false
+  reported: 1

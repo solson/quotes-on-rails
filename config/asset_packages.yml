@@ -9,4 +9,5 @@ javascripts:
 stylesheets: 
 - base:
   - base
+  - ie
 
