@@ -1,0 +1,21 @@
+<div class="quote box">
+	
+	<p class="id"><%=link_to '#'+quote.id.to_s, short_quote_url(quote) %>
+		<% if logged_in? %>
+			- <%=link_to 'Edit', edit_quote_url(quote) %>
+		<% end %>
+	</p>
+	
+	<p class="rating">
+		<a class="vote-down">-</a> <%=h quote.rating %> <a class="vote-up">+</a>
+	</p>
+	
+	<p class="text">
+		<%=h(quote.quote).delete("\r").gsub("\n",'<br />') %>
+	</p>
+	
+	<% if quote.comment.length > 0 %>
+		<hr />
+		<p>Comments: <%=h quote.comment %></p>
+	<% end %>
+</div>

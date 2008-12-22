@@ -1,6 +1,6 @@
 class QuotesController < ApplicationController
   
-  require_role :admin, :only => [ :edit, :update, :destroy, :approve ]
+  #require_role :admin, :for => [ :edit, :update, :destroy, :approve ]
   
   def index
     

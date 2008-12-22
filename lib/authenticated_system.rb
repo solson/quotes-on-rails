@@ -1,34 +1,34 @@
 module AuthenticatedSystem
   protected
-    # Returns true or false if the user is logged in.
-    # Preloads @current_user with the user model if they're logged in.
+    # Returns true or false if the admin is logged in.
+    # Preloads @current_admin with the admin model if they're logged in.
     def logged_in?
-      !!current_user
+      !!current_admin
     end
 
-    # Accesses the current user from the session.
+    # Accesses the current admin from the session.
     # Future calls avoid the database because nil is not equal to false.
-    def current_user
-      @current_user ||= (login_from_session || login_from_basic_auth || login_from_cookie) unless @current_user == false
+    def current_admin
+      @current_admin ||= (login_from_session || login_from_basic_auth || login_from_cookie) unless @current_admin == false
     end
 
-    # Store the given user id in the session.
-    def current_user=(new_user)
-      session[:user_id] = new_user ? new_user.id : nil
-      @current_user = new_user || false
+    # Store the given admin id in the session.
+    def current_admin=(new_admin)
+      session[:admin_id] = new_admin ? new_admin.id : nil
+      @current_admin = new_admin || false
     end
 
-    # Check if the user is authorized
+    # Check if the admin is authorized
     #
     # Override this method in your controllers if you want to restrict access
-    # to only a few actions or if you want to check if the user
+    # to only a few actions or if you want to check if the admin
     # has the correct rights.
     #
     # Example:
     #
     #  # only allow nonbobs
     #  def authorized?
-    #    current_user.login != "bob"
+    #    current_admin.login != "bob"
     #  end
     #
     def authorized?(action=nil, resource=nil, *args)
@@ -58,7 +58,7 @@ module AuthenticatedSystem
     # The default action is to redirect to the login screen.
     #
     # Override this method in your controllers if you want to have special
-    # behavior in case the user is not authorized
+    # behavior in case the admin is not authorized
     # to access the requested action.  For example, a popup window might
     # simply close itself.
     def access_denied
@@ -91,25 +91,25 @@ module AuthenticatedSystem
       session[:return_to] = nil
     end
 
-    # Inclusion hook to make #current_user and #logged_in?
+    # Inclusion hook to make #current_admin and #logged_in?
     # available as ActionView helper methods.
     def self.included(base)
-      base.send :helper_method, :current_user, :logged_in?, :authorized? if base.respond_to? :helper_method
+      base.send :helper_method, :current_admin, :logged_in?, :authorized? if base.respond_to? :helper_method
     end
 
     #
     # Login
     #
 
-    # Called from #current_user.  First attempt to login by the user id stored in the session.
+    # Called from #current_admin.  First attempt to login by the admin id stored in the session.
     def login_from_session
-      self.current_user = User.find_by_id(session[:user_id]) if session[:user_id]
+      self.current_admin = Admin.find_by_id(session[:admin_id]) if session[:admin_id]
     end
 
-    # Called from #current_user.  Now, attempt to login by basic authentication information.
+    # Called from #current_admin.  Now, attempt to login by basic authentication information.
     def login_from_basic_auth
       authenticate_with_http_basic do |login, password|
-        self.current_user = User.authenticate(login, password)
+        self.current_admin = Admin.authenticate(login, password)
       end
     end
     
@@ -117,14 +117,14 @@ module AuthenticatedSystem
     # Logout
     #
 
-    # Called from #current_user.  Finaly, attempt to login by an expiring token in the cookie.
-    # for the paranoid: we _should_ be storing user_token = hash(cookie_token, request IP)
+    # Called from #current_admin.  Finaly, attempt to login by an expiring token in the cookie.
+    # for the paranoid: we _should_ be storing admin_token = hash(cookie_token, request IP)
     def login_from_cookie
-      user = cookies[:auth_token] && User.find_by_remember_token(cookies[:auth_token])
-      if user && user.remember_token?
-        self.current_user = user
+      admin = cookies[:auth_token] && Admin.find_by_remember_token(cookies[:auth_token])
+      if admin && admin.remember_token?
+        self.current_admin = admin
         handle_remember_cookie! false # freshen cookie token (keeping date)
-        self.current_user
+        self.current_admin
       end
     end
 
@@ -133,10 +133,10 @@ module AuthenticatedSystem
     # However, **all session state variables should be unset here**.
     def logout_keeping_session!
       # Kill server-side auth cookie
-      @current_user.forget_me if @current_user.is_a? User
-      @current_user = false     # not logged in, and don't do it for me
+      @current_admin.forget_me if @current_admin.is_a? Admin
+      @current_admin = false     # not logged in, and don't do it for me
       kill_remember_cookie!     # Kill client-side auth cookie
-      session[:user_id] = nil   # keeps the session but kill our variable
+      session[:admin_id] = nil   # keeps the session but kill our variable
       # explicitly kill any other session variables you set
     end
 
@@ -158,18 +158,18 @@ module AuthenticatedSystem
     # and they should be changed at each login
 
     def valid_remember_cookie?
-      return nil unless @current_user
-      (@current_user.remember_token?) && 
-        (cookies[:auth_token] == @current_user.remember_token)
+      return nil unless @current_admin
+      (@current_admin.remember_token?) && 
+        (cookies[:auth_token] == @current_admin.remember_token)
     end
     
     # Refresh the cookie auth token if it exists, create it otherwise
     def handle_remember_cookie! new_cookie_flag
-      return unless @current_user
+      return unless @current_admin
       case
-      when valid_remember_cookie? then @current_user.refresh_token # keeping same expiry date
-      when new_cookie_flag        then @current_user.remember_me 
-      else                             @current_user.forget_me
+      when valid_remember_cookie? then @current_admin.refresh_token # keeping same expiry date
+      when new_cookie_flag        then @current_admin.remember_me 
+      else                             @current_admin.forget_me
       end
       send_remember_cookie!
     end
@@ -180,8 +180,8 @@ module AuthenticatedSystem
     
     def send_remember_cookie!
       cookies[:auth_token] = {
-        :value   => @current_user.remember_token,
-        :expires => @current_user.remember_token_expires_at }
+        :value   => @current_admin.remember_token,
+        :expires => @current_admin.remember_token_expires_at }
     end
 
 end

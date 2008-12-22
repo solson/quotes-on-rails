@@ -215,7 +215,7 @@ div.fieldWithErrors textarea
     border-bottom: 3px solid #FFFFFF; }
 
 .main_tabnav a:hover {
-    color: #FFFFFF;
+    color: #000000;
     background: #FFFFFF; }
 
 .main_tabnav a:visited {

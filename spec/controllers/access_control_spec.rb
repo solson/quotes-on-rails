@@ -42,7 +42,7 @@ ACCESS_CONTROL_IS_LOGIN_REQD = [
   :login_is_required,]
 
 describe AccessControlTestController do
-  fixtures        :users
+  fixtures        :admins
   before do
     # is there a better way to do this?
     ActionController::Routing::Routes.add_route '/login_is_required',           :controller => 'access_control_test',   :action => 'login_is_required'
@@ -50,12 +50,12 @@ describe AccessControlTestController do
   end
 
   ACCESS_CONTROL_FORMATS.each do |format, success_text|
-    ACCESS_CONTROL_AM_I_LOGGED_IN.each do |logged_in_status, user_login|
+    ACCESS_CONTROL_AM_I_LOGGED_IN.each do |logged_in_status, admin_login|
       ACCESS_CONTROL_IS_LOGIN_REQD.each do |login_reqd_status|
         describe "requesting #{format.blank? ? 'html' : format}; #{logged_in_status.to_s.humanize} and #{login_reqd_status.to_s.humanize}" do
           before do
             logout_keeping_session!
-            @user = format.blank? ? login_as(user_login) : authorize_as(user_login)
+            @admin = format.blank? ? login_as(admin_login) : authorize_as(admin_login)
             get login_reqd_status.to_s, :format => format
           end
 

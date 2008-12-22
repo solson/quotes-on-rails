@@ -21,34 +21,41 @@ render_tabnav :main,
     t.highlights_on :controller => 'quotes', :action => 'index'
   end
 
-  #add_tab do |t|
-    #t.named 'Latest'
-    #t.titled 'Latest Quotes'
-    #t.links_to latest_quotes_url
-    #t.highlights_on :controller => 'quotes', :action => 'latest'
-  #end
+  add_tab do |t|
+    t.named 'Latest'
+    t.titled 'Latest Quotes'
+    t.links_to latest_url
+    t.highlights_on :controller => 'quotes', :action => 'latest'
+  end
 	
-  #add_tab do |t|
-    #t.named 'Browse'
-    #t.titled 'Browse all Quotes'
-    #t.links_to :controller => 'quotes', :action => 'browse'
-    #t.highlights_on :controller => 'quotes', :action => 'browse'
-		#t.highlights_on :controller => 'quotes', :action => 'show'
-  #end
+  add_tab do |t|
+    t.named 'Browse'
+    t.titled 'Browse all Quotes'
+    t.links_to browse_url
+    t.highlights_on :controller => 'quotes', :action => 'browse'
+		t.highlights_on :controller => 'quotes', :action => 'show'
+  end
 	
-  #add_tab do |t|
-    #t.named 'Search'
-    #t.titled 'Search for Quotes'
-    #t.links_to :controller => 'quotes', :action => 'search'
-    #t.highlights_on :controller => 'quotes', :action => 'search'
-  #end
+  add_tab do |t|
+    t.named 'Random'
+    t.titled 'Random Quotes'
+    t.links_to random_url
+    t.highlights_on :controller => 'quotes', :action => 'random'
+  end
+  
+  add_tab do |t|
+    t.named 'Search'
+    t.titled 'Search for Quotes'
+    t.links_to search_url
+    t.highlights_on :controller => 'quotes', :action => 'search'
+  end
 
-  #add_tab do |t|
-    #t.named 'Submit'
-    #t.titled 'Add a new Quote'
-    #t.links_to new_quote_url
-    #t.highlights_on :controller => 'quotes', :action => 'new'
-  #end
+  add_tab do |t|
+    t.named 'Add Quote'
+    t.titled 'Add a new Quote'
+    t.links_to new_quote_url
+    t.highlights_on :controller => 'quotes', :action => 'new'
+  end
 
   #add_tab do |t|
     #t.named 'Admin'

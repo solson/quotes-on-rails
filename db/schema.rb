@@ -17,14 +17,6 @@ ActiveRecord::Schema.define(:version => 20081010045003) do
     t.datetime "updated_at"
   end
 
-  create_table "passwords", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "reset_code"
-    t.datetime "expiration_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "quotes", :force => true do |t|
     t.integer  "votes_count", :default => 0
     t.text     "quote"
@@ -34,44 +26,6 @@ ActiveRecord::Schema.define(:version => 20081010045003) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "roles", :force => true do |t|
-    t.string "name"
-  end
-
-  create_table "roles_users", :id => false, :force => true do |t|
-    t.integer "role_id"
-    t.integer "user_id"
-  end
-
-  create_table "sessions", :force => true do |t|
-    t.string   "session_id", :null => false
-    t.text     "data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
-  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
-
-  create_table "users", :force => true do |t|
-    t.string   "login",                     :limit => 40
-    t.string   "identity_url"
-    t.string   "name",                      :limit => 100, :default => ""
-    t.string   "email",                     :limit => 100
-    t.string   "crypted_password",          :limit => 40
-    t.string   "salt",                      :limit => 40
-    t.string   "remember_token",            :limit => 40
-    t.string   "activation_code",           :limit => 40
-    t.string   "state",                                    :default => "passive"
-    t.datetime "remember_token_expires_at"
-    t.datetime "activated_at"
-    t.datetime "deleted_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "users", ["login"], :name => "index_users_on_login", :unique => true
 
   create_table "votes", :force => true do |t|
     t.integer  "ip_id"

@@ -14,8 +14,8 @@ Dir[File.join(this_dir, "steps/*.rb")].each do |file|
   require file
 end
 
-with_steps_for :ra_navigation, :ra_response, :ra_resource, :user do
-  story_files = Dir[File.join(this_dir, "users", '*.story')]
+with_steps_for :ra_navigation, :ra_response, :ra_resource, :admin do
+  story_files = Dir[File.join(this_dir, "admins", '*.story')]
   story_files.each do |file|
     run file, :type => RailsStory 
   end

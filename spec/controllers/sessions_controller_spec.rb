@@ -5,11 +5,11 @@ require File.dirname(__FILE__) + '/../spec_helper'
 include AuthenticatedTestHelper
 
 describe SessionsController do
-  fixtures        :users
+  fixtures        :admins
   before do 
-    @user  = mock_user
+    @admin  = mock_admin
     @login_params = { :login => 'quentin', :password => 'test' }
-    User.stub!(:authenticate).with(@login_params[:login], @login_params[:password]).and_return(@user)
+    Admin.stub!(:authenticate).with(@login_params[:login], @login_params[:password]).and_return(@admin)
   end
   def do_create
     post :create, @login_params
@@ -29,12 +29,12 @@ describe SessionsController do
               @ccookies.stub!(:[]).with(:auth_token).and_return(token_value)
               @ccookies.stub!(:delete).with(:auth_token)
               @ccookies.stub!(:[]=)
-              @user.stub!(:remember_me) 
-              @user.stub!(:refresh_token) 
-              @user.stub!(:forget_me)
-              @user.stub!(:remember_token).and_return(token_value) 
-              @user.stub!(:remember_token_expires_at).and_return(token_expiry)
-              @user.stub!(:remember_token?).and_return(has_request_token == :valid)
+              @admin.stub!(:remember_me) 
+              @admin.stub!(:refresh_token) 
+              @admin.stub!(:forget_me)
+              @admin.stub!(:remember_token).and_return(token_value) 
+              @admin.stub!(:remember_token_expires_at).and_return(token_expiry)
+              @admin.stub!(:remember_token?).and_return(has_request_token == :valid)
               if want_remember_me
                 @login_params[:remember_me] = '1'
               else 
@@ -50,18 +50,18 @@ describe SessionsController do
             it 'redirects to the home page'  do do_create; response.should redirect_to('/')   end
             it "does not reset my session"   do controller.should_not_receive(:reset_session).and_return nil; do_create end # change if you uncomment the reset_session path
             if (has_request_token == :valid)
-              it 'does not make new token'   do @user.should_not_receive(:remember_me);   do_create end
-              it 'does refresh token'        do @user.should_receive(:refresh_token);     do_create end 
+              it 'does not make new token'   do @admin.should_not_receive(:remember_me);   do_create end
+              it 'does refresh token'        do @admin.should_receive(:refresh_token);     do_create end 
               it "sets an auth cookie"       do do_create;  end
             else
               if want_remember_me
-                it 'makes a new token'       do @user.should_receive(:remember_me);       do_create end 
-                it "does not refresh token"  do @user.should_not_receive(:refresh_token); do_create end
+                it 'makes a new token'       do @admin.should_receive(:remember_me);       do_create end 
+                it "does not refresh token"  do @admin.should_not_receive(:refresh_token); do_create end
                 it "sets an auth cookie"       do do_create;  end
               else 
-                it 'does not make new token' do @user.should_not_receive(:remember_me);   do_create end
-                it 'does not refresh token'  do @user.should_not_receive(:refresh_token); do_create end 
-                it 'kills user token'        do @user.should_receive(:forget_me);         do_create end 
+                it 'does not make new token' do @admin.should_not_receive(:remember_me);   do_create end
+                it 'does not refresh token'  do @admin.should_not_receive(:refresh_token); do_create end 
+                it 'kills user token'        do @admin.should_receive(:forget_me);         do_create end 
               end
             end
           end # inner describe
@@ -72,7 +72,7 @@ describe SessionsController do
   
   describe "on failed login" do
     before do
-      User.should_receive(:authenticate).with(anything(), anything()).and_return(nil)
+      Admin.should_receive(:authenticate).with(anything(), anything()).and_return(nil)
       login_as :quentin
     end
     it 'logs out keeping session'   do controller.should_receive(:logout_keeping_session!); do_create end
