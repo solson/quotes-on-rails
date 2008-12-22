@@ -1,12 +1,3 @@
-<p>
-  <b>Quote:</b>
-  <%=h @quote.quote %>
-</p>
+<% title 'Quote #' + @quote.id.to_s %>
 
-<p>
-  <b>Comment:</b>
-  <%=h @quote.comment %>
-</p>
-
-<%= link_to 'Edit', edit_quote_path(@quote) %> |
-<%= link_to 'Back', quotes_path %>
+<%= render :partial => 'quote' %>

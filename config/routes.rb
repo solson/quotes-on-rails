@@ -3,10 +3,10 @@ ActionController::Routing::Routes.draw do |map|
   map.latest '/latest', :controller => 'quotes', :action => 'latest'
   map.browse '/browse', :controller => 'quotes', :action => 'browse'
   map.random '/random', :controller => 'quotes', :action => 'random'
-  map.top '/top', :controller => 'quotes', :action => 'top'
+  map.top    '/top',    :controller => 'quotes', :action => 'top'
   map.bottom '/bottom', :controller => 'quotes', :action => 'bottom'
-  map.queue '/queue', :controller => 'quotes', :action => 'queue'
-  map.add '/add', :controller => 'quotes', :action => 'new'
+  map.queue  '/queue',  :controller => 'quotes', :action => 'queue'
+  map.add    '/add',    :controller => 'quotes', :action => 'new'
   map.search '/search', :controller => 'quotes', :action => 'search'
   map.short_quote '/:id', :controller => 'quotes', :action => 'show', :id => /\d+/
   

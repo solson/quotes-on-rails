@@ -1,16 +1,18 @@
 <%= title 'Submit Quote', :h2 %>
 
-<% form_for(@quote) do |f| %>
-  <%= f.error_messages %>
-  <p>
-    <%= f.label :quote %><br />
-    <%= f.text_area :quote %>
-  </p>
-  <p>
-    <%= f.label :comment %><br />
-    <%= f.text_area :comment %>
-  </p>
-  <p>
-    <%= f.submit "Submit" %>
-  </p>
-<% end %>
+<div class="box">
+  <% form_for(@quote) do |f| %>
+    <%= f.error_messages %>
+    <p>
+      <%= f.label :quote %><br />
+      <%= f.text_area :quote, :rows => 15 %>
+    </p>
+    <p>
+      <%= f.label :comment %><br />
+      <%= f.text_area :comment, :rows => 2 %>
+    </p>
+    <p>
+      <%= f.submit "Submit" %>
+    </p>
+  <% end %>
+</div>
