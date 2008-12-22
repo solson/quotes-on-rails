@@ -7,7 +7,8 @@
 	</p>
 	
 	<p class="rating">
-		<a class="vote-down">-</a> <%=h quote.positive_votes.count %> <a class="vote-up">+</a>
+		<a class="vote-down">-</a> <%=h quote.positive_votes.count - quote.negative_votes.count %>
+    (<%=h quote.votes_count %>) <a class="vote-up">+</a>
 	</p>
 	
 	<p class="text">
