@@ -6,9 +6,9 @@ class QuotesController < ApplicationController
   end
   
   def latest
-    @quotes = Quote.paginate :per_page => 20, :page => params['page'],
+    @quotes = Quote.paginate(:per_page => 20, :page => params['page'],
                              :conditions => ["approved = ?", true],
-                             :order => "id DESC"
+                             :order => "id DESC")
   end
   
   def rss
