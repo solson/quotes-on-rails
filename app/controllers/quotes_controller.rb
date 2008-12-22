@@ -1,9 +1,8 @@
 class QuotesController < ApplicationController
   
-  #require_role :admin, :for => [ :edit, :update, :destroy, :approve ]
+  before_filter :login_required, :except => [ :index, :latest, :rss, :show, :new, :create, :vote ]
   
   def index
-    
   end
   
   def latest

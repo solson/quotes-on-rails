@@ -8,6 +8,7 @@ ActionController::Routing::Routes.draw do |map|
   map.queue  '/queue',  :controller => 'quotes', :action => 'queue'
   map.add    '/add',    :controller => 'quotes', :action => 'new'
   map.search '/search', :controller => 'quotes', :action => 'search'
+  map.rss    '/rss',    :controller => 'quotes', :action => 'rss'
   map.short_quote '/:id', :controller => 'quotes', :action => 'show', :id => /\d+/
   
   
