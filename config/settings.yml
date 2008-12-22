@@ -12,6 +12,6 @@ staging:
   admin_email: scott@scott-olson.org
   
 production:
-  site_url: http://www.example.com
+  site_url: http://quotes.scott-olson.org
   site_name: Quotes on Rails
   admin_email: scott@scott-olson.org

@@ -7,10 +7,10 @@ Quotes on Rails is a quote database written with the Ruby on Rails <http://www.r
 Instructions:
 -------------
   * Install Rails 2.1.1 (sudo gem install rails -v 2.1.1)
-  * Download and unzip Quotes on Rails
+  * Download Quotes on Rails
   * Edit the database.yml and the settings.yml files
   * Rake db:migrate
-	* [insert more instructions here!]
+	* Run it!
   * Have fun :)
 
 Quotes on Rails can use any of the various SQL databases supported by Ruby on Rails.
