@@ -1,4 +1,4 @@
-<div class="quote box">
+<% div_for(quote, :class => "box") do %>
 	
 	<p class="id"><%=link_to '#'+quote.id.to_s, short_quote_url(quote) %>
 		<% if logged_in? %>
@@ -7,16 +7,22 @@
 	</p>
 	
 	<p class="rating">
-		<a class="vote-down">-</a> <%=h quote.positive_votes.count - quote.negative_votes.count %>
-    (<%=h quote.votes_count %>) <a class="vote-up">+</a>
+		<%=link_to_remote "-", :update => "#{quote.id}-rating",
+      :url => vote_url(quote, 'down'), :html => { :href => vote_url(quote, 'down'), :class => 'vote-down' } %>
+      
+    <span id="<%= quote.id %>-rating"><%=h quote.rating %>
+    (<%=h quote.votes.count %>)</span>
+    
+    <%=link_to_remote "+", :update => "#{quote.id}-rating",
+      :url => vote_url(quote, 'up'), :html => { :href => vote_url(quote, 'up'), :class => 'vote-up' } %>
 	</p>
 	
 	<p class="text">
 		<%=h(quote.quote).delete("\r").gsub("\n",'<br />') %>
 	</p>
 	
-	<% if quote.comment.length > 0 %>
+	<% if quote.comment? %>
 		<hr />
 		<p>Comment: <%=h quote.comment %></p>
 	<% end %>
-</div>
+<% end %>

@@ -11,10 +11,12 @@ ActionController::Routing::Routes.draw do |map|
   map.rss    '/rss',    :controller => 'quotes', :action => 'rss'
   map.short_quote '/:id', :controller => 'quotes', :action => 'show', :id => /\d+/
   
+  map.vote '/quotes/:id/vote/:up_or_down', :controller => 'quotes',
+                 :action => 'vote', :id => /\d+/, :up_or_down => /(up|down)/
+  
   
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'
-  map.register '/register', :controller => 'admins', :action => 'create'
   
   # Restful Authentication Resources
   map.resources :quotes

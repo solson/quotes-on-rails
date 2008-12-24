@@ -12,13 +12,13 @@ xml.rss "version" => "2.0", "xmlns:dc" => "http://purl.org/dc/elements/1.1/" do
         xml.title       'Quote #' + quote.id.to_s
 
         desc = '<pre>' + h(quote.quote) + '</pre>'
-        if quote.comment.length > 0
+        if quote.comment?
           desc += '<pre>Comment: ' + h(quote.comment) + '</pre>'
         end
 
         xml.description desc
         xml.link        short_quote_url(quote.id)
-        xml.guid        short_quote_url(quote.id)
+        xml.guid        quote.id.to_s + quote.updated_at.to_i.to_s
       end
     end
 

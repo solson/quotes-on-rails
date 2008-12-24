@@ -32,11 +32,10 @@ ActiveRecord::Schema.define(:version => 20081222023524) do
   end
 
   create_table "quotes", :force => true do |t|
-    t.integer  "votes_count", :default => 0
     t.text     "quote"
     t.text     "comment"
-    t.boolean  "approved",    :default => false
-    t.integer  "reported",    :default => 0
+    t.boolean  "approved",   :default => false
+    t.integer  "reported",   :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

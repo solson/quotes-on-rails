@@ -69,22 +69,28 @@ class QuotesController < ApplicationController
     if request.xhr? # AJAX request
       render :text => "<p style=\"color: green\">Quote #{params[:id]} was successfully <em>approved</em>.</p>"
     else # normal request
-      flash[:notice] = "Quote #{params[:id]} was successfully approved."
+      flash[:notice] = "Quote ##{params[:id]} was successfully approved."
       redirect_to :action => 'queue'
     end
   end
   
   def vote
     @quote = Quote.find(params[:id])
-    vote = Vote.new(:quote => @quote)
+    voter_ip = Ip.find_or_create_by_ip(IPAddr.new(request.remote_ip).to_i)
+    positive = (params[:up_or_down] == 'up')
+    vote = Vote.new(:quote => @quote, :ip => voter_ip, :positive => positive)
+    vote.save
     
-    if request.xhr?
-      render :text => @quote.rating
-    else
-      flash[:notice] = "Quote #{params[:id]} was successfully voted."
-      redirect_to short_quote_url(@quote)
+    if request.xhr? # AJAX request
+      render :text => "#{@quote.rating} (#{@quote.votes.count})"
+    else # normal request
+      if vote.errors.empty?
+        flash[:notice] = "Quote ##{@quote.id} was successfully voted #{params[:up_or_down]}."
+      else
+        flash[:error] = "You have already voted on Quote ##{@quote.id}."
+      end
+      redirect_back_or_default("/#{@quote.id}")
     end
-    
   end
   
 end
